@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export type Transaction = {
     label: string
     date: string
-    amount: string
+    amount: number
     category: string
 }
 

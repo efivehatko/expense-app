@@ -82,7 +82,7 @@ function Transactions(): JSX.Element {
         const newTransaction = {
             label,
             date,
-            amount: parseInt(amount, 10),
+            amount: Number(amount).toFixed(2),
             category: category.label,
         }
 
