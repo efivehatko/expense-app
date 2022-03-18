@@ -1,118 +1,118 @@
 .categories {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
-  padding: 2vh;
-  border-right: 1px solid gainsboro;
-
-  &__title {
-    color: slategray;
-    font-weight: 100;
-  }
-  &__field {
-    flex: 4;
-  }
-
-  &__color {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #c4c4c4;
-    border-radius: 4px;
-    padding: 7px 14px;
-    p {
-      flex: 2;
-      color: rgba(0, 0, 0, 0.6);
-    }
-    input {
-      flex: 1;
-      border-radius: 10px;
-    }
-  }
-
-  &__button {
-    flex: 1;
-  }
-
-  &__list {
-    max-height: 40vh;
-    overflow-y: auto;
-    padding: 1vh 2px !important;
-    border-bottom: 1px solid gainsboro;
-    &__item {
-      border-radius: 4px;
-      padding: 1vh;
-      margin-bottom: 1vh;
-      box-shadow: 0px 1px 1px 1px gainsboro;
-      cursor: pointer;
-
-      &:last-child {
-        margin-bottom: 0;
-      }
-
-      &:hover {
-        .categories__list__item__color {
-          transform: scale(1.3);
-        }
-      }
-      
-      &__color {
-        transition: transform .3s;
-        width: 10px !important;
-        height: 10px !important;
-        border-radius: 5px;
-      }
-
-      &__text {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 145px;
-        margin: 0 !important;
-        background-color: white;
-        padding: 0 1vh;
-        user-select: none;
-        color: slategray;
-      }
-    }
-  }
-}
-
-.transactions {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 1vh;
-  padding: 2vh;
-
-  &__title {
-    color: slategray;
-    font-weight: 100;
-  }
-
-  &__container {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding: 2vh;
+    border-right: 1px solid gainsboro;
 
-    &__table {
-      height: 80%;
+    &__title {
+        color: slategray;
+        font-weight: 100;
+    }
+    &__field {
+        flex: 4;
+    }
+
+    &__color {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #c4c4c4;
+        border-radius: 4px;
+        padding: 7px 14px;
+        p {
+            flex: 2;
+            color: rgba(0, 0, 0, 0.6);
+        }
+        input {
+            flex: 1;
+            border-radius: 10px;
+        }
+    }
+
+    &__button {
+        flex: 1;
     }
 
     &__list {
-      height: 100%;
-      &__title {
+        max-height: 40vh;
+        overflow-y: auto;
+        padding: 1vh 2px !important;
+        border-bottom: 1px solid gainsboro;
+        &__item {
+            border-radius: 4px;
+            padding: 1vh;
+            margin-bottom: 1vh;
+            box-shadow: 0px 1px 1px 1px gainsboro;
+            cursor: pointer;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            &:hover {
+                .categories__list__item__color {
+                    transform: scale(1.3);
+                }
+            }
+
+            &__color {
+                transition: transform 0.3s;
+                width: 10px !important;
+                height: 10px !important;
+                border-radius: 5px;
+            }
+
+            &__text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 120px;
+                margin: 0 !important;
+                background-color: white;
+                padding: 0 1vh;
+                user-select: none;
+                color: slategray;
+            }
+        }
+    }
+}
+
+.transactions {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    padding: 2vh;
+
+    &__title {
         color: slategray;
         font-weight: 100;
-      }
-
-      &__table {
-        height: 40vh !important;
-        .category-color-cell {
-          height: 16px;
-          width: 16px;
-          border-radius: 8px;
-        }
-      }
     }
-  }
+
+    &__container {
+        height: 100%;
+
+        &__table {
+            height: 80%;
+        }
+
+        &__list {
+            height: 100%;
+            &__title {
+                color: slategray;
+                font-weight: 100;
+            }
+
+            &__table {
+                height: 40vh !important;
+                .category-color-cell {
+                    height: 16px;
+                    width: 16px;
+                    border-radius: 8px;
+                }
+            }
+        }
+    }
 }

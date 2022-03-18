@@ -30,7 +30,7 @@ function Graphs(): JSX.Element {
                     value: transactions
                         .filter((t) => t.category === ca)
                         .map((t) => t.amount)
-                        .reduce((acc, current) => acc + current, 0),
+                        .reduce((acc, current) => acc + Number(current), 0),
                     info: [...deletedCategories, ...categories].find(
                         (category) => category.label === ca
                     ),
@@ -55,16 +55,16 @@ function Graphs(): JSX.Element {
     const spended = transactions
         .map((t) => Number(t.amount))
         .filter((n) => n < 0)
-        .reduce((acc, c) => acc + c, 0)
+        .reduce((acc, c) => acc + Number(c), 0)
         .toFixed(2)
     const income = transactions
         .map((t) => Number(t.amount))
         .filter((n) => n > 0)
-        .reduce((acc, c) => acc + c, 0)
+        .reduce((acc, c) => acc + Number(c), 0)
         .toFixed(2)
     const profit = transactions
         .map((t) => Number(t.amount))
-        .reduce((acc, c) => acc + c, 0)
+        .reduce((acc, c) => acc + Number(c), 0)
         .toFixed(2)
 
     return (
