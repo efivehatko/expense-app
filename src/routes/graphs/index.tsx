@@ -30,10 +30,7 @@ function Graphs(): JSX.Element {
                     value: transactions
                         .filter((t) => t.category === ca)
                         .map((t) => t.amount)
-                        .reduce(
-                            (acc, current) => acc + parseInt(current, 10),
-                            0
-                        ),
+                        .reduce((acc, current) => acc + current, 0),
                     info: [...deletedCategories, ...categories].find(
                         (category) => category.label === ca
                     ),
