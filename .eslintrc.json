@@ -22,6 +22,7 @@
     "rules": {
         "no-console": "warn",
         "no-tabs": 0,
+        "react/function-component-definition": "off",
         "no-use-before-define": "off",
         "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
