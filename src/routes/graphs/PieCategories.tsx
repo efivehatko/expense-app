@@ -1,9 +1,24 @@
 import React, { useState } from 'react'
 import { Cell, Pie, PieChart, ResponsiveContainer, Sector } from 'recharts'
 import { useAppSelector } from '../../redux/store/hooks'
+import { Category } from '../home/Categories'
 
-const renderActiveShape = (props: any): JSX.Element => {
-    // const RADIAN = Math.PI / 180
+interface ActiveShapeProps {
+    cx: number
+    cy: number
+    innerRadius: number
+    outerRadius: number
+    startAngle: number
+    endAngle: number
+    fill: string
+    payload: {
+        name: string
+        info: Category
+    }
+    percent: number
+}
+
+const renderActiveShape = (props: ActiveShapeProps): JSX.Element => {
     const {
         cx,
         cy,

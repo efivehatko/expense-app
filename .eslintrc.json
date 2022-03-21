@@ -1,5 +1,5 @@
 {
-    "ignorePatterns": ["**/stories/**"],
+    "ignorePatterns": ["temp.js", "**/stories/**"],
     "env": {
         "browser": true,
         "es2021": true

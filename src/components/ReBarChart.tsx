@@ -14,7 +14,15 @@ import {
 
 import { ChartData } from '../routes/graphs'
 
-function CustomizedAxisTick(props: any): JSX.Element {
+interface AxisTickProps {
+    x: number
+    y: number
+    payload: {
+        value: string
+    }
+}
+
+function CustomizedAxisTick(props: AxisTickProps): JSX.Element {
     const { x, y, payload } = props
     return (
         <g transform={`translate(${x},${y})`}>
@@ -45,7 +53,7 @@ export default function ReBarChart(props: {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" tick={<CustomizedAxisTick />} />
+                <XAxis dataKey="name" tick={CustomizedAxisTick} />
                 <YAxis />
                 <Tooltip />
                 <ReferenceLine y={0} stroke="#000" />
