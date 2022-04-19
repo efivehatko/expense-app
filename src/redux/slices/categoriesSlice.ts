@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import {
+    createDraftSafeSelector,
+    createSlice,
+    PayloadAction,
+} from '@reduxjs/toolkit'
+import { RootState } from '../store'
 
 type Category = {
     id: number
@@ -7,12 +12,12 @@ type Category = {
     color: string
 }
 
-interface categoriesState {
+interface CategoriesState {
     list: Category[]
     deleted: Category[]
 }
 
-const initialState = {
+const initialState: CategoriesState = {
     list: [
         { id: 1, label: 'Salary', color: '#FF8042', isDeleted: false },
         { id: 2, label: 'Gifts', color: '#FFBB28', isDeleted: false },
@@ -21,18 +26,18 @@ const initialState = {
         { id: 5, label: 'Traveling', color: '#F90194', isDeleted: false },
     ],
     deleted: [],
-} as categoriesState
+}
 
 export const categoriesSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        add: (state: categoriesState, action) => {
+        add: (state: CategoriesState, action) => {
             const generateId = (): number =>
                 state.list.length + state.deleted.length + 1
             state.list.push({ id: generateId(), ...action.payload })
         },
-        remove: (state: categoriesState, action: PayloadAction<number>) => {
+        remove: (state: CategoriesState, action: PayloadAction<number>) => {
             const cateogryToDelete = state.list.find(
                 (c) => c.id === action.payload
             )
@@ -43,7 +48,7 @@ export const categoriesSlice = createSlice({
                 state.list = state.list.filter((ca) => ca.id !== action.payload)
             }
         },
-        revive: (state: categoriesState, action: PayloadAction<string>) => {
+        revive: (state: CategoriesState, action: PayloadAction<string>) => {
             const categoryToRevive = state.deleted.find(
                 (c) => c.label === action.payload
             )
@@ -57,6 +62,13 @@ export const categoriesSlice = createSlice({
         },
     },
 })
+
+const categoriesState = (state: RootState): CategoriesState => state.categories
+
+export const categoriesSelector = createDraftSafeSelector(
+    categoriesState,
+    (state) => state
+)
 
 // Action creators are generated for each case reducer function
 export const { add, remove, revive } = categoriesSlice.actions

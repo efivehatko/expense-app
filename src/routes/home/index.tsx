@@ -4,7 +4,7 @@ import { Route } from 'react-router-dom'
 import Categories, { Category } from './Categories'
 import Transactions from './Transactions'
 import './index.scss'
-import Accordions from '../../components/Accordions'
+import { Accordions } from '../../components/Accordions/Accordions'
 
 type Categories = Category[]
 

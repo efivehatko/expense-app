@@ -8,8 +8,10 @@
         "plugin:react/recommended",
         "airbnb",
         "plugin:@typescript-eslint/recommended",
+        "plugin:react-hooks/recommended",
         "prettier/prettier",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:jsx-a11y/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -29,6 +31,16 @@
         "@typescript-eslint/no-use-before-define": ["error"],
         "prettier/prettier": ["error"],
         "react/require-default-props": [0],
+        "jsx-a11y/label-has-for": [
+            2,
+            {
+                "components": [],
+                "required": {
+                    "every": ["nesting", "id"]
+                },
+                "allowChildren": true
+            }
+        ],
         "react/jsx-filename-extension": [
             "warn",
             {
@@ -71,6 +83,9 @@
     },
     "settings": {
         "import/resolver": {
+            "node": {
+                "extensions": [".ts", ".tsx", ".js", ".jsx"]
+            },
             "typescript": {}
         }
     }

@@ -14,23 +14,6 @@
         flex: 4;
     }
 
-    &__color {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid #c4c4c4;
-        border-radius: 4px;
-        padding: 7px 14px;
-        p {
-            flex: 2;
-            color: rgba(0, 0, 0, 0.6);
-        }
-        input {
-            flex: 1;
-            border-radius: 10px;
-        }
-    }
-
     &__button {
         flex: 1;
     }

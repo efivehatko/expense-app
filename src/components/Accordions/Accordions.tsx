@@ -5,23 +5,30 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import Typography from '@mui/material/Typography'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
-type Props = {
+export interface AccordionsProp {
+    summary: string
+    content: JSX.Element
+}
+
+export interface Props {
     containerProps?: React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLDivElement>,
         HTMLDivElement
     >
     openFirst?: boolean
-    accordions: {
-        summary: string
-        content: JSX.Element
-    }[]
+    accordions: AccordionsProp[]
 }
 
-export default function Accordions({
+export function Accordions({
     accordions,
     containerProps,
+    openFirst,
 }: Props): JSX.Element | null {
     const [expanded, setExpanded] = React.useState<number | false>(false)
+
+    React.useEffect(() => {
+        setExpanded(openFirst ? 0 : false)
+    }, [openFirst])
 
     if (!accordions.length) {
         return null

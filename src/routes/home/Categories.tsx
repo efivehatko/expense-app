@@ -1,15 +1,17 @@
-import { Button, Stack, TextField } from '@mui/material'
+import { Button, Stack } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import AddCircle from '@mui/icons-material/AddCircle'
 import CategoriesList from './CategoriesList'
-import AlertDialogSlide from '../../components/AlertDialogSlide'
+import { AlertDialogSlide } from '../../components/AlertDialogSlide/AlertDialogSlide'
 import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
 import { add, remove, revive } from '../../redux/slices/categoriesSlice'
+import { TextInput } from '../../components/TextField/TextInput'
+import { ColorPicker } from '../../components/ColorPicker/ColorPicker'
 
 export type Category = {
     id: number
     label: string
-    color?: string
+    color: string
     isDeleted: boolean
 }
 
@@ -88,8 +90,9 @@ function Categories(): JSX.Element {
         <div className="categories">
             <h1 className="categories__title">Categories</h1>
             <Stack direction="column" spacing={1}>
-                <TextField
+                <TextInput
                     className="categories__field"
+                    name="Name"
                     label="Name"
                     size="small"
                     variant="outlined"
@@ -98,17 +101,14 @@ function Categories(): JSX.Element {
                         setName(e.target.value)
                     }
                 />
-                <Stack className="categories__color" direction="row">
-                    <p>Color</p>
-                    <input
-                        type="color"
-                        name="color"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                            setColor(e.target.value)
-                        }}
-                        value={color}
-                    />
-                </Stack>
+                <ColorPicker
+                    fullWidth
+                    name="color"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setColor(e.target.value)
+                    }}
+                    value={color}
+                />
                 <Button
                     variant="contained"
                     className="categories__buton"

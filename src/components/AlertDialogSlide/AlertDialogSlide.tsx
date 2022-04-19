@@ -26,7 +26,7 @@ type AlertDialogSlide = {
     onClose: () => void
 }
 
-export default function AlertDialogSlide({
+export function AlertDialogSlide({
     title,
     content,
     yes = 'yes',
@@ -67,7 +67,9 @@ export default function AlertDialogSlide({
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={decisionNo}>{no.toUpperCase()}</Button>
+                    <Button color="error" onClick={decisionNo}>
+                        {no.toUpperCase()}
+                    </Button>
                     <Button onClick={decisionYes}>{yes.toUpperCase()}</Button>
                 </DialogActions>
             </Dialog>

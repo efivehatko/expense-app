@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createDraftSafeSelector, createSlice } from '@reduxjs/toolkit'
+import { RootState } from '../store'
 
 export type Transaction = {
     label: string
@@ -7,13 +8,13 @@ export type Transaction = {
     category: string
 }
 
-interface transactionsState {
+interface TransactionsState {
     list: Transaction[]
 }
 
-const initialState = {
+const initialState: TransactionsState = {
     list: [],
-} as transactionsState
+}
 
 export const transactionsSlice = createSlice({
     name: 'transactions',
@@ -25,6 +26,14 @@ export const transactionsSlice = createSlice({
         },
     },
 })
+
+const transactionsState = (state: RootState): TransactionsState =>
+    state.transactions
+
+export const transactionsSelector = createDraftSafeSelector(
+    transactionsState,
+    (state) => state
+)
 
 export const { add } = transactionsSlice.actions
 

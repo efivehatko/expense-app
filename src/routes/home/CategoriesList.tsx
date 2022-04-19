@@ -1,10 +1,10 @@
-import { IconButton, List, ListItem, ListItemText } from '@mui/material'
+import { List, ListItem, ListItemText } from '@mui/material'
 import React from 'react'
-import Delete from '@mui/icons-material/Delete'
 import { Category } from './Categories'
 import { useAppSelector } from '../../redux/store/hooks'
+import { CategoryItem } from '../../components/Category/CategoryItem'
 
-type CategoriesListProps = {
+export type CategoriesListProps = {
     onDelete: (category: Category) => void
 }
 
@@ -16,28 +16,7 @@ function CategoriesList({ onDelete }: CategoriesListProps): JSX.Element {
             {categories.length ? (
                 categories.map((category) => {
                     return (
-                        <ListItem
-                            key={category.id}
-                            className="categories__list__item"
-                            disablePadding
-                            secondaryAction={
-                                <IconButton
-                                    onClick={() => onDelete(category)}
-                                    edge="end"
-                                    aria-label="delete"
-                                >
-                                    <Delete />
-                                </IconButton>
-                            }
-                        >
-                            <div
-                                className="categories__list__item__color"
-                                style={{ backgroundColor: category.color }}
-                            />
-                            <p className="categories__list__item__text">
-                                {category.label}
-                            </p>
-                        </ListItem>
+                        <CategoryItem category={category} onDelete={onDelete} />
                     )
                 })
             ) : (

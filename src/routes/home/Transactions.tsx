@@ -1,28 +1,29 @@
 import { DatePicker } from '@mui/lab'
+import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import {
     Button,
     FormControl,
     Grid,
     InputLabel,
     MenuItem,
-    SelectChangeEvent,
     Select,
+    SelectChangeEvent,
     TextField,
 } from '@mui/material'
-import AdapterDateFns from '@mui/lab/AdapterDateFns'
-import LocalizationProvider from '@mui/lab/LocalizationProvider'
-import React, { useState } from 'react'
-import TransactionsList from './TransactionsList'
+import React, { FC, useState } from 'react'
+import { categoriesSelector } from '../../redux/slices/categoriesSlice'
+import { add, transactionsSelector } from '../../redux/slices/transactionsSlice'
+import { useAppDispatch, useAppSelector } from '../../redux/store/hooks'
 import { Category } from './Categories'
-import { useAppSelector, useAppDispatch } from '../../redux/store/hooks'
-import { add } from '../../redux/slices/transactionsSlice'
+import TransactionsList from './TransactionsList'
 
-type categories = {
+type CategoriesProps = {
     categories: Category[]
     onChange: (e: SelectChangeEvent<string>) => void
 }
 
-function Categories({ categories, onChange }: categories): JSX.Element {
+function Categories({ categories, onChange }: CategoriesProps): JSX.Element {
     const [value, setValue] = useState('')
     const handleChange = (e: SelectChangeEvent<string>): void => {
         setValue(e.target.value)
@@ -54,7 +55,7 @@ function Categories({ categories, onChange }: categories): JSX.Element {
     )
 }
 
-function Transactions(): JSX.Element {
+const Transactions: FC = () => {
     const [date, setDate] = useState<Date | string>(new Date())
     const [amount, setAmount] = useState('')
     const [label, setLabel] = useState('')
@@ -62,18 +63,25 @@ function Transactions(): JSX.Element {
         id: 1,
         label: '',
         isDeleted: false,
+        color: '',
     })
 
     const dispatch = useAppDispatch()
 
-    const transactions = useAppSelector((state) => state.transactions.list)
-    const categories = useAppSelector((state) => state.categories.list)
+    const { list: transactions } = useAppSelector(transactionsSelector)
+    const { list: categoriesList } = useAppSelector(categoriesSelector)
 
     const onCategoryChange = (e: SelectChangeEvent<string>): void => {
         const id = parseInt(e.target.value, 10)
-        const changedCategory = categories.find((ca) => ca.id === id)
-        if (changedCategory)
-            setCategory({ id, label: changedCategory.label, isDeleted: false })
+        const changedCategory = categoriesList.find((item) => item.id === id)
+        if (changedCategory) {
+            setCategory({
+                id,
+                label: changedCategory.label,
+                isDeleted: false,
+                color: changedCategory.color,
+            })
+        }
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -121,13 +129,13 @@ function Transactions(): JSX.Element {
                             <DatePicker
                                 label="Date"
                                 value={date}
-                                onChange={(newValue) =>
+                                onChange={(newValue) => {
                                     setDate(
                                         new Date(
                                             newValue || new Date()
                                         ).toLocaleString('en-US')
                                     )
-                                }
+                                }}
                                 renderInput={(params) => (
                                     <TextField
                                         name="Date"
@@ -155,7 +163,7 @@ function Transactions(): JSX.Element {
                     <Grid item lg={2} md={4} sm={4} xs={12}>
                         <Categories
                             onChange={onCategoryChange}
-                            categories={categories}
+                            categories={categoriesList}
                         />
                     </Grid>
                     <Grid item lg={2} md={4} sm={4} xs={12}>
