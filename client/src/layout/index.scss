@@ -1,0 +1,78 @@
+.layout {
+    height: 100%;
+
+    &__header {
+        height: 8vh;
+        background-color: #1876d2;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+
+        &__link {
+            box-shadow: 0 0 0 0;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: white;
+            font-size: 2vh;
+            font-weight: 600;
+            margin: 0 1vh;
+            padding: 2px;
+            margin-left: 4vh;
+            transition: box-shadow 0.1s;
+
+            &:hover {
+                box-shadow: -2px 2px 0 2px;
+            }
+        }
+    }
+
+    &__body {
+        height: 92vh;
+        &__container {
+            padding: 0 2vh;
+            height: 100%;
+            margin: 0 auto;
+            min-width: 90%;
+            max-width: 1000px;
+        }
+    }
+}
+
+.help-Ukraine {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    height: 2%;
+    display: flex;
+    cursor: pointer;
+
+    &__flag {
+        flex: 1;
+        width: 10vh;
+        display: flex;
+        flex-direction: column;
+        > div {
+            flex: 1;
+        }
+
+        &__blue {
+            background-color: #0158b5;
+        }
+        &__yellow {
+            background-color: #f6cf02;
+        }
+    }
+
+    &__text {
+        flex: 1;
+        text-transform: uppercase;
+        font-weight: 600;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.2vh;
+        padding: 0 1vh;
+    }
+}

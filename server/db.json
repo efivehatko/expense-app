@@ -1,0 +1,16 @@
+{
+    "users": [
+        {
+            "username": "johnsnow",
+            "firstName": "John",
+            "lastName": "Snow",
+            "password": "johnsnow123"
+        },
+        {
+            "username": "mrrobot",
+            "firstName": "Elliot",
+            "lastName": "Alderson",
+            "password": "3l10th@k3r"
+        }
+    ]
+}
