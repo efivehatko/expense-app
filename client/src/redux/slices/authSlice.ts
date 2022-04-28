@@ -6,16 +6,16 @@ import {
 import { User } from '../../types/UserType'
 import { RootState } from '../store'
 
-interface UserState {
+interface AuthState {
     loggedIn: boolean
-    info?: User
+    info?: User | null
 }
 
-const initialState: UserState = {
+const initialState: AuthState = {
     loggedIn: false,
 }
 
-export const transactionsSlice = createSlice({
+export const userSlice = createSlice({
     name: 'transactions',
     initialState,
     reducers: {
@@ -23,13 +23,17 @@ export const transactionsSlice = createSlice({
             state.loggedIn = true
             state.info = action.payload
         },
+        logout: (state) => {
+            state.loggedIn = false
+            state.info = null
+        },
     },
 })
 
-const userState = (state: RootState): UserState => state.user
+const authState = (state: RootState): AuthState => state.user
 
-export const userSelector = createDraftSafeSelector(userState, (state) => state)
+export const authSelector = createDraftSafeSelector(authState, (state) => state)
 
-export const { signIn } = transactionsSlice.actions
+export const authActions = userSlice.actions
 
-export default transactionsSlice.reducer
+export default userSlice.reducer

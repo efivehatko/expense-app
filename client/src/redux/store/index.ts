@@ -3,11 +3,13 @@ import { combineReducers } from 'redux'
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk'
+import alertSlice from '../slices/alertSlice'
+import userSlice from '../slices/authSlice'
 import categoriesSlice from '../slices/categoriesSlice'
 import transactionsSlice from '../slices/transactionsSlice'
-import userSlice from '../slices/userSlice'
 
 const reducers = combineReducers({
+    alert: alertSlice,
     user: userSlice,
     categories: categoriesSlice,
     transactions: transactionsSlice,

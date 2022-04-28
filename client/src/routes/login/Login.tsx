@@ -1,9 +1,10 @@
-import { Button, TextField } from '@mui/material'
+import { Button, TextField, Typography } from '@mui/material'
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { signIn } from '../../redux/slices/userSlice'
+import { alertActions } from '../../redux/slices/alertSlice'
+import { authActions } from '../../redux/slices/authSlice'
 import { useAppDispatch } from '../../redux/store/hooks'
 import { handleSignIn } from '../../utils/signInHelper'
 
@@ -36,38 +37,78 @@ export type SignInFormValues = {
 export const Login: React.FC = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const { register, handleSubmit } = useForm<SignInFormValues>({
+    const { control, handleSubmit } = useForm<SignInFormValues>({
         mode: 'onChange',
     })
     const onSubmit = (data: SignInFormValues): void => {
-        // handle auth
         handleSignIn(data).then((response) => {
             if (response.user) {
-                dispatch(signIn(response.user))
+                dispatch(authActions.signIn(response.user))
+                dispatch(
+                    alertActions.show({
+                        severity: 'success',
+                        message: `Successfully signed in as ${response.user.username}`,
+                    })
+                )
                 navigate('/')
+            } else {
+                dispatch(
+                    alertActions.show({
+                        severity: 'error',
+                        message: 'Invalid credentials',
+                    })
+                )
             }
-            // alert with error message
         })
     }
 
     return (
         <Container>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <TextField
-                    {...register('username')}
-                    type="text"
-                    fullWidth
-                    label="Username"
-                    size="small"
-                    variant="outlined"
+                <Typography variant="h4">Sign in</Typography>
+                <Controller
+                    name="username"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'required' }}
+                    render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                    }) => (
+                        <TextField
+                            onChange={onChange}
+                            error={!!error}
+                            helperText={error ? error.message : null}
+                            value={value}
+                            type="text"
+                            fullWidth
+                            label="Username"
+                            size="small"
+                            variant="outlined"
+                        />
+                    )}
                 />
-                <TextField
-                    {...register('password')}
-                    type="password"
-                    fullWidth
-                    label="Password"
-                    size="small"
-                    variant="outlined"
+                <Controller
+                    name="password"
+                    control={control}
+                    defaultValue=""
+                    rules={{ required: 'required' }}
+                    render={({
+                        field: { onChange, value },
+                        fieldState: { error },
+                    }) => (
+                        <TextField
+                            onChange={onChange}
+                            error={!!error}
+                            helperText={error ? error.message : null}
+                            value={value}
+                            type="password"
+                            fullWidth
+                            label="Password"
+                            size="small"
+                            variant="outlined"
+                        />
+                    )}
                 />
                 <Button type="submit" fullWidth variant="outlined">
                     Sign In

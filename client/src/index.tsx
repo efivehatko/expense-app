@@ -5,8 +5,9 @@ import { Provider } from 'react-redux'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { persistStore } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
-import { RequireAuth } from './hoc/routing/RequireAuth'
-import Layout from './layout'
+import Layout from './app'
+import AlertSnackbar from './components/AlertSnackbar/AlertSnackbar'
+import { RequireAuth } from './hoc/RequireAuth'
 import store from './redux/store/index'
 import { Login } from './routes/login/Login'
 import './styles/global.scss'
@@ -30,6 +31,7 @@ ReactDOM.render(
                     />
                 </Routes>
             </HashRouter>
+            <AlertSnackbar />
         </PersistGate>
     </Provider>,
     document.getElementById('root')

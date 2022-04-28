@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Route } from 'react-router-dom'
+import PieCategories from '../../components/PieCategories/PieCategories'
 import { TransactionsBarChart } from '../../components/TransactionsBarChart/TransactionsBarChart'
 import { useAppSelector } from '../../redux/store/hooks'
 import { BarChartData } from '../../types/BarChartTypes'
 import './index.scss'
-import PieCategories from './PieCategories'
 
 function Graphs(): JSX.Element {
     const transactions = useAppSelector((state) => state.transactions.list)

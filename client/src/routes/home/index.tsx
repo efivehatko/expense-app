@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Grid, useMediaQuery } from '@mui/material'
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { Accordions } from '../../components/Accordions/Accordions'
@@ -10,13 +10,13 @@ import Transactions from './Transactions'
 type Categories = Category[]
 
 function Home(): JSX.Element {
-    if (window.innerWidth < 900) {
+    const mobile = useMediaQuery('(max-width:700px)')
+    if (mobile) {
         return (
             <>
                 <Accordions
                     bigSummary
                     noBorders
-                    openFirst
                     accordions={[
                         {
                             summary: 'Categories',
@@ -36,21 +36,13 @@ function Home(): JSX.Element {
                 key="categories"
                 lg={2}
                 md={3}
-                sm={12}
-                xs={12}
+                sm={4}
+                xs={4}
                 item
             >
                 <Categories />
             </Grid>
-            <Grid
-                height="100%"
-                key="graphs"
-                lg={10}
-                md={9}
-                sm={12}
-                xs={12}
-                item
-            >
+            <Grid height="100%" key="graphs" lg={10} md={9} sm={8} xs={12} item>
                 <Transactions />
             </Grid>
         </Grid>
